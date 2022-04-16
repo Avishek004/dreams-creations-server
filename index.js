@@ -15,10 +15,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/', (req, res) => {
-    res.send("I am Creating a Database For My Website")
-})
-
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
@@ -27,6 +23,10 @@ client.connect(err => {
     const reviewCollection = client.db("DreamCreations").collection("reviews");
     const adminCollection = client.db("DreamCreations").collection("admins");
     console.log('Database Connected Successfully')
+    
+    app.get('/', (req, res) => {
+    res.send("I am Creating a Database For My Website")
+})
 
 
     app.post('/addService', (req, res) => {
